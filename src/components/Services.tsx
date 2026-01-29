@@ -46,11 +46,11 @@ const Services = () => {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef}>
+    <section id="services" ref={sectionRef} aria-labelledby="services-heading">
       <div className="section-container">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="section-title">What I Do</span>
-          <h2 className="section-heading">
+          <h2 id="services-heading" className="section-heading">
             Building Solutions That
             <br />
             <span className="text-accent">Drive Results</span>
@@ -59,15 +59,15 @@ const Services = () => {
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {services.map((service, index) => (
-            <div
+            <article
               key={service.title}
               className={`card-glow group transition-all duration-600 ease-out ${isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-12'
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-12'
                 }`}
               style={{ transitionDelay: `${index * 120}ms` }}
             >
-              <div className="icon-box mb-5 transition-transform duration-300 ease-out group-hover:scale-110">
+              <div className="icon-box mb-5 transition-transform duration-300 ease-out group-hover:scale-110" aria-hidden="true">
                 <service.icon className="w-6 h-6" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-3">
@@ -76,7 +76,7 @@ const Services = () => {
               <p className="text-muted-foreground leading-relaxed">
                 {service.description}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>

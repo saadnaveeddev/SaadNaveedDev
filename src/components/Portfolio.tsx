@@ -105,11 +105,11 @@ const Portfolio = () => {
 
   return (
     <>
-      <section id="portfolio" ref={sectionRef}>
+      <section id="portfolio" ref={sectionRef} aria-labelledby="portfolio-heading">
         <div className="section-container">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="section-title">Selected Work</span>
-            <h2 className="section-heading">
+            <h2 id="portfolio-heading" className="section-heading">
               Projects That
               <br />
               <span className="text-accent">Make Impact</span>
@@ -118,7 +118,7 @@ const Portfolio = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {projects.map((project, index) => (
-              <div
+              <article
                 key={project.title}
                 onClick={() => setSelectedProject(project)}
                 className={`group card-glow p-0 overflow-hidden cursor-pointer transition-all duration-600 ease-out ${isVisible
@@ -126,15 +126,17 @@ const Portfolio = () => {
                   : 'opacity-0 translate-y-12'
                   }`}
                 style={{ transitionDelay: `${index * 120}ms` }}
+                aria-label={`${project.title} - Click to view details`}
               >
                 {/* Project image */}
                 <div className="relative overflow-hidden aspect-[4/3]">
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={`${project.title} - ${project.description}`}
+                    loading={index < 3 ? "eager" : "lazy"}
                     className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex items-end p-4">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out flex items-end p-4" aria-hidden="true">
                     <span className="text-foreground text-sm font-medium">View Project →</span>
                   </div>
                 </div>
@@ -149,18 +151,18 @@ const Portfolio = () => {
                   </p>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2" role="list" aria-label="Technologies used">
                     {project.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="tech-tag">
+                      <span key={tag} className="tech-tag" role="listitem">
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 3 && (
-                      <span className="tech-tag">+{project.tags.length - 3}</span>
+                      <span className="tech-tag" role="listitem">+{project.tags.length - 3}</span>
                     )}
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
