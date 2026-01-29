@@ -22,13 +22,13 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef}>
+    <section id="about" ref={sectionRef} aria-labelledby="about-heading">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Text content */}
-          <div className={`transition-all duration-600 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <article className={`transition-all duration-600 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <span className="section-title">About Me</span>
-            <h2 className="section-heading">
+            <h2 id="about-heading" className="section-heading">
               Crafting Digital
               <br />
               <span className="text-accent">Experiences</span>
@@ -45,24 +45,24 @@ const About = () => {
             </div>
 
             {/* Stats */}
-            <div className="mt-10 grid grid-cols-3 gap-6">
+            <div className="mt-10 grid grid-cols-3 gap-6" role="group" aria-label="Professional statistics">
               <div>
-                <div className="text-3xl font-bold text-foreground">5+</div>
+                <div className="text-3xl font-bold text-foreground" aria-label="5 plus years of experience">5+</div>
                 <div className="text-sm text-muted-foreground mt-1">Years Experience</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-foreground">50+</div>
+                <div className="text-3xl font-bold text-foreground" aria-label="50 plus projects completed">50+</div>
                 <div className="text-sm text-muted-foreground mt-1">Projects Completed</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-foreground">30+</div>
+                <div className="text-3xl font-bold text-foreground" aria-label="30 plus happy clients">30+</div>
                 <div className="text-sm text-muted-foreground mt-1">Happy Clients</div>
               </div>
             </div>
-          </div>
+          </article>
 
           {/* Abstract illustration */}
-          <div className={`relative transition-all duration-600 ease-out delay-[240ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <div className={`relative transition-all duration-600 ease-out delay-[240ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} role="presentation" aria-hidden="true">
             <div className="relative aspect-square max-w-md mx-auto">
               {/* Abstract shapes */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -77,7 +77,7 @@ const About = () => {
               {/* Code icon in center */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-20 h-20 rounded-2xl bg-card border border-border shadow-elevated flex items-center justify-center">
-                  <svg className="w-10 h-10 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <svg className="w-10 h-10 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-label="Code symbol">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
                   </svg>
                 </div>

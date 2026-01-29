@@ -62,73 +62,94 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <section id="testimonials" ref={sectionRef}>
-      <div className="section-container">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="section-title">Testimonials</span>
-          <h2 className="section-heading">
-            What Clients
-            <br />
-            <span className="text-accent">Say</span>
-          </h2>
-        </div>
+    <>
+      <section id="testimonials" ref={sectionRef} aria-labelledby="testimonials-heading">
+        <div className="section-container">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="section-title">Testimonials</span>
+            <h2 id="testimonials-heading" className="section-heading">
+              What Clients
+              <br />
+              <span className="text-accent">Say</span>
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={testimonial.name}
-              className={`group relative bg-background rounded-xl p-6 border border-border/50 transition-all duration-600 ease-out hover:border-accent/30 hover:-translate-y-1 ${isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-12'
-                }`}
-              style={{
-                transitionDelay: `${index * 120}ms`,
-                boxShadow: 'var(--shadow-card)'
-              }}
-            >
-              {/* Quote icon */}
-              <Quote className="w-8 h-8 text-accent/30 mb-4" strokeWidth={1} />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {testimonials.map((testimonial, index) => (
+              <article
+                key={testimonial.name}
+                className={`group relative bg-background rounded-xl p-6 border border-border/50 transition-all duration-600 ease-out hover:border-accent/30 hover:-translate-y-1 ${isVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-12'
+                  }`}
+                style={{
+                  transitionDelay: `${index * 120}ms`,
+                  boxShadow: 'var(--shadow-card)'
+                }}
+                itemScope
+                itemType="https://schema.org/Review"
+              >
+                {/* Quote icon */}
+                <Quote className="w-8 h-8 text-accent/30 mb-4" strokeWidth={1} aria-hidden="true" />
 
-              {/* Rating stars */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-4 h-4 text-accent fill-accent"
-                  />
-                ))}
-              </div>
-
-              {/* Testimonial text */}
-              <p className="text-muted-foreground leading-relaxed mb-6 line-clamp-3">
-                "{testimonial.text}"
-              </p>
-
-              {/* Client info */}
-              <div className="flex items-center gap-3">
-                {/* Avatar placeholder */}
-                <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-foreground font-medium text-sm border border-border/50">
-                  {testimonial.name.split(' ').map(n => n[0]).join('')}
+                {/* Rating stars */}
+                <div className="flex gap-1 mb-4" role="img" aria-label={`${testimonial.rating} out of 5 stars`}>
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-4 h-4 text-accent fill-accent"
+                      aria-hidden="true"
+                    />
+                  ))}
+                  <meta itemProp="ratingValue" content={testimonial.rating.toString()} />
                 </div>
-                <div>
-                  <div className="font-medium text-foreground text-sm">
-                    {testimonial.name}
+
+                {/* Testimonial text */}
+                <p className="text-muted-foreground leading-relaxed mb-6 line-clamp-3" itemProp="reviewBody">
+                  "{testimonial.text}"
+                </p>
+
+                {/* Client info */}
+                <div className="flex items-center gap-3" itemProp="author" itemScope itemType="https://schema.org/Person">
+                  {/* Avatar placeholder */}
+                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-foreground font-medium text-sm border border-border/50" aria-hidden="true">
+                    {testimonial.name.split(' ').map(n => n[0]).join('')}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    {testimonial.role}
+                  <div>
+                    <div className="font-medium text-foreground text-sm" itemProp="name">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground" itemProp="jobTitle">
+                      {testimonial.role}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Subtle hover glow */}
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{ boxShadow: 'var(--glow-accent)' }}
-              />
-            </div>
-          ))}
+                {/* Subtle hover glow */}
+                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" aria-hidden="true"
+                  style={{ boxShadow: 'var(--glow-accent)' }}
+                />
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Structured Data for Aggregate Rating */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Saad Naveed",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "ratingCount": testimonials.length.toString()
+          }
+        })
+      }} />
+    </>
   );
 };
 

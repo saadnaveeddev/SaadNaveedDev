@@ -1,14 +1,6 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Allow all major search engine crawlers
 User-agent: *
 Allow: /
+
+# Sitemap location
+Sitemap: https://saadnaveed.dev/sitemap.xml

@@ -6,11 +6,11 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <header className="relative min-h-screen flex items-center justify-center overflow-hidden" role="banner">
       {/* Background is now global - overlay for hero text prominence */}
 
       {/* Enhanced overlay for text prominence */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10" role="presentation" aria-hidden="true">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/60" />
 
@@ -24,16 +24,16 @@ const Hero = () => {
 
       <div className="section-container text-center">
         <div className="max-w-3xl mx-auto">
-          {/* Name */}
+          {/* Main Heading - Primary H1 */}
           <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight animate-fade-up">
             Saad Naveed
           </h1>
 
-          {/* Subtitle */}
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground font-medium animate-fade-up-delay-1">
+          {/* Subtitle with role */}
+          <p className="mt-6 text-lg md:text-xl text-muted-foreground font-medium animate-fade-up-delay-1" role="doc-subtitle">
             Full-Stack Developer{" "}
-            <span className="text-accent">|</span> MERN{" "}
-            <span className="text-accent">|</span> AI-Powered Web Solutions
+            <span className="text-accent" aria-hidden="true">|</span> MERN{" "}
+            <span className="text-accent" aria-hidden="true">|</span> AI-Powered Web Solutions
           </p>
 
           {/* Value statement */}
@@ -48,21 +48,22 @@ const Hero = () => {
             <button
               onClick={scrollToWork}
               className="btn-primary group"
+              aria-label="Scroll to portfolio section"
             >
               View My Work
-              <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
+              <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" aria-hidden="true" />
             </button>
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-fade-up-delay-3">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-fade-up-delay-3" role="presentation" aria-hidden="true">
           <div className="w-6 h-10 rounded-full border-2 border-border flex items-start justify-center p-2">
             <div className="w-1 h-2 bg-accent rounded-full animate-pulse" />
           </div>
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 
